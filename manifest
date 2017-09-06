@@ -1,0 +1,127 @@
+# Copyright (c) 2003-2017 Broad Institute, Inc., Massachusetts Institute of Technology, and Regents of the University of California.  All rights reserved.
+#GSEALeadingEdgeReport
+#Tue Jun 28 18:04:09 JST 2016
+JVMLevel=1.8
+LSID=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.module.analysis\:00358\:999999999
+author=Aravind Subramanian, Broad Institute
+commandLine=<run-with-env> -u "java/1.8" java <java_flags> -Djava.util.prefs.PreferencesFactory\=com.allaboutbalance.articles.disableprefs.DisabledPreferencesFactory -Djava.awt.headless\=true -cp <libdir>commons-lang3-3.4.jar<path.separator><libdir>commons-io-2.4.jar<path.separator><libdir>commons-cli-1.2.jar<path.separator><libdir>gp-gsea.jar<path.separator><libdir>disable-prefs.jar<path.separator><libdir>gsea-3.0.jar org.genepattern.modules.gsea.LeadingEdgeToolWrapper -enrichment_zip <enrichment.result.zip.file> <gene.sets> <output.file.name> -imgFormat <image.format> <alt.delim> --extraPlots=<create.lev.plots> -dev_mode <dev.mode> -create_zip <create.zip>
+cpuType=any
+taskDoc=doc.html
+description=Gene Set Enrichment Analysis
+fileFormat=
+language=Java
+name=GSEALeadingEdgeReport
+os=any
+
+p1_MODE=IN
+p1_TYPE=FILE
+p1_default_value=
+p1_description=Enrichment result file in ZIP format
+p1_fileFormat=zip
+p1_flag=
+p1_name=enrichment.result.zip.file
+p1_optional=
+p1_prefix=
+p1_prefix_when_specified=
+p1_type=java.io.File
+p1_value=
+
+p2_MODE=
+p2_TYPE=TEXT
+p2_default_value=
+p2_description=Comma-separated list of Gene Sets to choose for the report; leave blank for all
+p2_fileFormat=
+p2_flag=
+p2_name=gene.sets
+p2_optional=on
+p2_prefix=
+p2_prefix_when_specified=--gsets=
+p2_type=java.lang.String
+p2_value=
+
+p3_MODE=
+p3_TYPE=TEXT
+p3_default_value=<enrichment.result.zip.file_basename>.report.zip
+p3_description=Name of the output file.  Note that this only applies if create.zip=true.
+p3_fileFormat=
+p3_flag=
+p3_name=output.file.name
+p3_optional=on
+p3_prefix=
+p3_prefix_when_specified=-output_file_name 
+p3_type=java.lang.String
+p3_value=
+
+p4_MODE=
+p4_TYPE=TEXT
+p4_default_value=png
+p4_description=
+p4_fileFormat=
+p4_flag=
+p4_name=image.format
+p4_optional=
+p4_prefix=
+p4_prefix_when_specified=
+p4_type=java.lang.String
+p4_value=png;svg;jpeg
+
+p5_MODE=
+p5_TYPE=TEXT
+p5_default_value=
+p5_description=Optional alternate delimiter character for gene set names instead of comma
+p5_fileFormat=
+p5_flag=
+p5_name=alt.delim
+p5_optional=on
+p5_prefix=
+p5_prefix_when_specified=--altDelim=
+p5_type=java.lang.String
+p5_value=
+
+p6_default_value=false
+p6_description=Create the LEV plots; this is useful mostly for development and debugging
+p6_fileFormat=
+p6_flag=
+p6_name=create.lev.plots
+p6_optional=
+p6_prefix=
+p6_prefix_when_specified=
+p6_type=java.lang.String
+p6_value=false;true
+
+p7_MODE=
+p7_TYPE=TEXT
+p7_default_value=true
+p7_description=Create a ZIP bundle of the output files.
+p7_fileFormat=
+p7_flag=
+p7_name=create.zip
+p7_optional=
+p7_prefix=
+p7_prefix_when_specified=
+p7_type=java.lang.String
+p7_value=false;true
+
+p8_MODE=
+p8_TYPE=TEXT
+p8_default_value=false
+p8_description=Enable developer mode.
+p8_fileFormat=
+p8_flag=
+p8_name=dev.mode
+p8_optional=
+p8_prefix=
+p8_prefix_when_specified=
+p8_type=java.lang.String
+p8_value=false;true
+
+pipelineModel=
+privacy=public
+quality=development
+requiredPatchLSIDs=
+requiredPatchURLs=
+serializedModel=
+taskType=Gene List Selection
+category=beta
+userid=eby@broadinstitute.org
+version=Development revision with GSEA v3.0 code.

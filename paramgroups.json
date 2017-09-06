@@ -1,0 +1,3 @@
+[{name: "Basic parameters", description: "These parameters are essential for the operation.", parameters: ["enrichment.result.zip.file", "gene.sets", "output.file.name", "image.format", "create.zip"]},
+ {name: "Advanced parameters", description: "Additional parameters with standard defaults.", hidden: true, parameters: ["alt.delim", "create.lev.plots", "dev.mode"]}
+]
