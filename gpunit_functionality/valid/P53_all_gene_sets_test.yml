@@ -1,0 +1,19 @@
+# Copyright (c) 2003-2018 Broad Institute, Inc., Massachusetts Institute of Technology, and Regents of the University of California.  All rights reserved.
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00358:1
+module: GSEALeadingEdgeReport
+name: GSEALeadingEdgeReport P53_all_gene_sets_test
+description: A simple test of GSEALeadingEdgeReport using output from a P53 analysis (simple_real_data_test in the GSEA GpUnit suite)
+params:
+       enrichment.result.zip.file: "<%gpunit.testData%>gpunit/GSEALeadingEdgeReport/v1/input/P53_collapsed_symbols.zip"
+       gene.sets: ""
+       output.file.name: "<enrichment.result.zip.file_basename>.report.zip"
+       image.format: "png"
+       create.lev.plots: "true"
+       create.zip: "true"
+       dev.mode: "true"
+assertions:
+        jobStatus: success
+        files:
+            "P53_collapsed_symbols.report.zip":
+                diffCmd: ../diffLERResultsAndReports.sh
+                diff: "<%gpunit.resultData%>gpunit/GSEALeadingEdgeReport/v1/output/valid/P53_all_gene_sets_test/P53_collapsed_symbols.report.zip"

@@ -1,0 +1,19 @@
+# Copyright (c) 2003-2018 Broad Institute, Inc., Massachusetts Institute of Technology, and Regents of the University of California.  All rights reserved.
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00358:1
+module: GSEALeadingEdgeReport
+name: GSEALeadingEdgeReport gender_dataset_test
+description: A simple test of GSEALeadingEdgeReport using output from a Gender analysis (gender_dataset_test in the GSEA GpUnit suite)
+params:
+       enrichment.result.zip.file: "<%gpunit.testData%>gpunit/GSEALeadingEdgeReport/v1/input/Gender_collapsed_symbols.zip"
+       gene.sets: ""
+       output.file.name: "<enrichment.result.zip.file_basename>.report.zip"
+       image.format: "png"
+       create.lev.plots: "true"
+       create.zip: "true"
+       dev.mode: "true"
+assertions:
+        jobStatus: success
+        files:
+            "Gender_collapsed_symbols.report.zip":
+                diffCmd: ../diffLERResultsAndReports.sh
+                diff: "<%gpunit.resultData%>gpunit/GSEALeadingEdgeReport/v1/output/valid/gender_dataset_test/Gender_collapsed_symbols.report.zip"
