@@ -1,11 +1,12 @@
 /*
- *  Copyright (c) 2003-2017 Broad Institute, Inc., Massachusetts Institute of Technology, and Regents of the University of California.  All rights reserved.
+ *  Copyright (c) 2003-2018 Broad Institute, Inc., Massachusetts Institute of Technology, and Regents of the University of California.  All rights reserved.
  */
 package org.genepattern.modules.gsea;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -109,8 +110,6 @@ public class LeadingEdgeToolWrapper {
             outputFileName = "leading_edge_report.zip";
         }
         final String zipFileName = outputFileName;
-
-        final ZipUtility zipUtility = new ZipUtility();
         
         // Set a couple of shutdownHooks to finish the job and clean up. LET exits after running
         // and does not return control back to the module code. These are done as two separate hooks
@@ -121,8 +120,9 @@ public class LeadingEdgeToolWrapper {
                 try {
                     if (!analysis.exists()) return;
                     try {
-                        // Zipper is a utility class in the GSEA JAR
-                        if (createZip) zipUtility.zipDir(analysis, new File(cwd, zipFileName));
+                        if (createZip) {
+                            copyZipToJobIfPresent(analysis, zipFileName, cwd);
+                        }
                     }
                     finally {
                         FileUtils.copyDirectory(analysis, cwd);
@@ -163,6 +163,8 @@ public class LeadingEdgeToolWrapper {
         // Unzip the input file to the working directory
         // NOTE: ZipUtility is a utility class in the GSEA JAR. This and Zipper (above) may be refactored into a single class in the future.
         final File inputExpanded = new File(tmp_working, "inputExpanded");
+
+        final ZipUtility zipUtility = new ZipUtility();
         zipUtility.unzip(new File(enrichmentResultZip), inputExpanded);
 
         // Create a param file
@@ -196,6 +198,7 @@ public class LeadingEdgeToolWrapper {
             // Finally, load up the remaining simple parameters. We'll let LeadingEdgeTool validate these.
             printOptionValueAsParam("imgFormat", cl, writer);
             printOptionValueAsParam("extraPlots", cl, writer);
+            printParam("zip_report", Boolean.toString(createZip), writer);
 
             printParam("gui", "false", writer);
         }
@@ -238,4 +241,26 @@ public class LeadingEdgeToolWrapper {
             }
         }
     }
+
+	private static void copyZipToJobIfPresent(final File analysis, String zipFileName, File cwd) throws InternalError {
+	    if (!analysis.exists()) return;
+	
+	    Collection<File> zips = FileUtils.listFiles(analysis, new String[] { "zip" }, false);
+	    if (zips == null || zips.isEmpty()) return;
+	
+	    // Check that we have exactly one ZIP. This should never happen.
+	    if (zips.size() > 1) {
+	        throw new InternalError("Internal Error: multiple ZIP files created");
+	    }
+	    File zip = zips.iterator().next();
+	
+	    try {
+	        File dest = new File(cwd, zipFileName);
+	        FileUtils.moveFile(zip, dest);
+	    }
+	    catch (IOException ioe) {
+	        System.err.println("Internal error moving result ZIP: ");
+	        System.err.println(ioe.getMessage());
+	    }
+	}
 }
