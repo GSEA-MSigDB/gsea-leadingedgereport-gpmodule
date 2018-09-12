@@ -2,12 +2,12 @@
 #module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00358:1
 module: GSEALeadingEdgeReport
 name: GSEALeadingEdgeReport P53_selected_gene_sets_test
-description: A simple test of GSEALeadingEdgeReport using output from a P53 analysis (simple_real_data_test in the GSEA GpUnit suite)
+description: A simple test of GSEALeadingEdgeReport using output from a P53 analysis (simple_real_data_test in the GSEA GpUnit suite).  Also tests SVG generation.
 params:
        enrichment.result.zip.file: "<%gpunit.testData%>gpunit/GSEALeadingEdgeReport/v1/input/P53_collapsed_symbols.zip"
        gene.sets: "CHR12Q12,CHR2Q35,CHR1Q31,CHR2P23,CHR12Q14"
        output.file.name: "<enrichment.result.zip.file_basename>.report.zip"
-       image.format: "png"
+       image.format: "svg"
        create.lev.plots: "true"
        create.zip: "true"
        dev.mode: "true"

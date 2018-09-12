@@ -24,7 +24,18 @@ diff --strip-trailing-cr -q $diffDir1/leading_edge_matrix_for_results.gmx $diffD
 status=$(( $? + status ))
 
 
-# Dropping comparison of plots with ImageMagick.  Possible new method: compare SVG files as XML.
+# For images, we diff the contents of any SVGs since it's just a simple file compare.  We've decided not to
+# deal with PNG comparisons as it's too resource-intensive and prone to per-machine variation.
+svgFileList=`ls -1 $diffDir1/*.svg.gz`
+for svgFile in $svgFileList; do
+   baseSvgFile=`basename $svgFile`
+   if [ -s $diffDir2/$baseSvgFile ]; then
+      zdiff --strip-trailing-cr -q --speed-large-files $svgFile $diffDir2/$baseSvgFile
+      status=$(( 1 + status ))
+   else
+      status=$(( $? + status ))
+   fi
+done
 
 rm -rf $diffDir1 $diffDir2
 exit $status
