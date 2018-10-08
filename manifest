@@ -3,7 +3,7 @@
 JVMLevel=1.8
 LSID=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.module.analysis\:00358\:999999999
 author=Aravind Subramanian, Broad Institute
-commandLine=<java> -Djava.util.prefs.PreferencesFactory\=com.allaboutbalance.articles.disableprefs.DisabledPreferencesFactory -Djava.awt.headless\=true -jar <libdir>GSEALeadingEdgeReport_gp.jar -enrichment_zip <enrichment.result.zip.file> <gene.sets> <output.file.name> -imgFormat <image.format> <alt.delim> --extraPlots=<create.lev.plots> -dev_mode <dev.mode> -create_zip <create.zip>
+commandLine=<java> -Djava.util.prefs.PreferencesFactory\=com.allaboutbalance.articles.disableprefs.DisabledPreferencesFactory -Djava.awt.headless\=true @LAUNCHER@ -enrichment_zip <enrichment.result.zip.file> <gene.sets> <output.file.name> -imgFormat <image.format> <alt.delim> --extraPlots=<create.lev.plots> -dev_mode <dev.mode> -create_zip <create.zip>
 cpuType=any
 taskDoc=doc.html
 description=Gene Set Enrichment Analysis
