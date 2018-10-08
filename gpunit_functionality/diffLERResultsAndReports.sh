@@ -4,9 +4,9 @@ execDir=`dirname $0`
 
 zip1=$1
 zip2=$2
+base1=`basename $1`
+base2=`basename $2`
 
-base1=`basename $2`
-base2=`basename $3`
 bare1=${base1%%.zip}
 bare2=${base2%%.zip}
 diffDir1=`mktemp -d $bare1.XXXXXX`
@@ -31,7 +31,6 @@ for svgFile in $svgFileList; do
    baseSvgFile=`basename $svgFile`
    if [ -s $diffDir2/$baseSvgFile ]; then
       zdiff --strip-trailing-cr -q --speed-large-files $svgFile $diffDir2/$baseSvgFile
-      status=$(( 1 + status ))
    else
       status=$(( $? + status ))
    fi
