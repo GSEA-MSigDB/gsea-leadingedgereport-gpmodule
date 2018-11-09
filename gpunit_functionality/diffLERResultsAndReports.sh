@@ -1,4 +1,4 @@
-# Copyright (c) 2003-2017 Broad Institute, Inc., Massachusetts Institute of Technology, and Regents of the University of California.  All rights reserved.
+# Copyright (c) 2003-2018 Broad Institute, Inc., Massachusetts Institute of Technology, and Regents of the University of California.  All rights reserved.
 #!/bin/sh
 execDir=`dirname $0`
 
@@ -31,8 +31,9 @@ for svgFile in $svgFileList; do
    baseSvgFile=`basename $svgFile`
    if [ -s $diffDir2/$baseSvgFile ]; then
       zdiff --strip-trailing-cr -q --speed-large-files $svgFile $diffDir2/$baseSvgFile
-   else
       status=$(( $? + status ))
+   else
+      status=$(( 1 + status ))
    fi
 done
 
