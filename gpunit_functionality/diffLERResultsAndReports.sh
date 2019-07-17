@@ -16,11 +16,11 @@ unzip -q $zip1 -d $diffDir1
 unzip -q $zip2 -d $diffDir2
 
 # Diff only selected files out of the ZIP
-diff --strip-trailing-cr -q $diffDir1/conv.gct $diffDir2/conv.gct
+diff -i --strip-trailing-cr -q $diffDir1/conv.gct $diffDir2/conv.gct
 status=$?
-diff --strip-trailing-cr -q $diffDir1/leading_edge_matrix_for_results.1.gct $diffDir2/leading_edge_matrix_for_results.1.gct
+diff -i --strip-trailing-cr -q $diffDir1/leading_edge_matrix_for_results.1.gct $diffDir2/leading_edge_matrix_for_results.1.gct
 status=$(( $? + status ))
-diff --strip-trailing-cr -q $diffDir1/leading_edge_matrix_for_results.gmx $diffDir2/leading_edge_matrix_for_results.gmx
+diff -i --strip-trailing-cr -q $diffDir1/leading_edge_matrix_for_results.gmx $diffDir2/leading_edge_matrix_for_results.gmx
 status=$(( $? + status ))
 
 
@@ -30,7 +30,7 @@ svgFileList=`ls -1 $diffDir1/*.svg.gz`
 for svgFile in $svgFileList; do
    baseSvgFile=`basename $svgFile`
    if [ -s $diffDir2/$baseSvgFile ]; then
-      zdiff --strip-trailing-cr -q --speed-large-files $svgFile $diffDir2/$baseSvgFile
+      zdiff -i --strip-trailing-cr -q --speed-large-files $svgFile $diffDir2/$baseSvgFile
       status=$(( $? + status ))
    else
       status=$(( 1 + status ))
