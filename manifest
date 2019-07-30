@@ -3,7 +3,7 @@
 JVMLevel=11
 LSID=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.module.analysis\:00358\:999999999
 author=Aravind Subramanian, Broad Institute
-commandLine=<libdir>/gsea-cli.sh LeadingEdgeTool -enrichment_zip <enrichment.result.zip.file> <gene.sets> <output.file.name> -imgFormat <image.format> <alt.delim> --extraPlots=<create.lev.plots> -dev_mode <dev.mode> -create_zip <create.zip>
+commandLine=<libdir>/gsea-cli.sh LeadingEdgeTool -enrichment_zip <enrichment.result.zip.file> <gene.sets> <output.file.name> -imgFormat <image.format> <alt.delim> --extraPlots=<create.lev.plots> -dev_mode <dev.mode> -zip_report <create.zip> -run_as_genepattern true
 cpuType=any
 taskDoc=doc.html
 description=Gene Set Enrichment Analysis
